@@ -56,12 +56,12 @@ class Start
 
     public function display($file)
     {
-        extract($this->assign);
+        $this->assign && extract($this->assign);
         $loader = new \Twig_Loader_Filesystem(APP . '/views');
         $twig = new \Twig_Environment($loader, array(
             'cache' => IMOOC . '/log/twig',
         ));
         $template = $twig->load($file);
-        echo $template->render($this->assign ? $this->assign : '');
+        echo $template->render($this->assign ? $this->assign : []);
     }
 }
